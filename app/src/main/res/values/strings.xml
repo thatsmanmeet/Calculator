@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="x">×<sup>×</sup></string>
+    <string name="divide_sign"><font size="30">÷</font></string>
+    <string name="ac">AC</string>
+    <string name="c">C</string>
+    <string name="btn_7">7</string>
+    <string name="btn_8">8</string>
+    <string name="btn_9">9</string>
+    <string name="btn_multiply">×</string>
+    <string name="btn_4">4</string>
+    <string name="btn_5">5</string>
+    <string name="btn_6">6</string>
+    <string name="btn_minus">-</string>
+    <string name="btn_1">1</string>
+    <string name="btn_2">2</string>
+    <string name="btn_3">3</string>
+    <string name="btn_add">+</string>
+    <string name="btn_0">0</string>
+    <string name="btn_dot">.</string>
+    <string name="btn_equals">=</string>
+    <string name="default_screen_text">0</string>
+    <string name="error_found_text">Error Found</string>
+    <string name="history_icon_text">history_icon</string>
+    <string name="history_title_text">History</string>
+    <string name="switch_to_light_theme">Switch To Light Theme</string>
+    <string name="switch_to_dark_theme">Switch to dark theme</string>
+    <string name="history_button">History Button</string>
+    <string name="error_logo_text">error logo</string>
+    <string name="change_theme_btn">ChangeThemeBtn</string>
+    <string name="btn_parenthesis_left">(</string>
+    <string name="btn_parenthesis_right">)</string>
+    <string name="btn_sin">sin</string>
+    <string name="btn_ln">ln</string>
+</resources>
