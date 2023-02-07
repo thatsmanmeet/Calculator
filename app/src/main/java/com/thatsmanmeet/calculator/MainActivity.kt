@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.thatsmanmeet.calculator.databinding.ActivityMainBinding
 import com.thatsmanmeet.calculator.room.History
@@ -26,27 +25,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         sharedPref = getSharedPreferences("themePref", MODE_PRIVATE)
         editor = sharedPref.edit()
-        window.navigationBarColor = getColor(R.color.unified_background_color)
         window.statusBarColor = getColor(R.color.black)
-        loadThemeData()
+        window.navigationBarColor = getColor(R.color.black)
         appDb = HistoryDatabase.getDatabase(this)
-        binding.cvChangeTheme?.setOnClickListener {
-            when (sharedPref.getString("theme", null)) {
-                null -> {
-                    saveThemeData("dark")
-                    loadThemeData()
-                    loadThemeData()
-                }
-                "dark" -> {
-                    saveThemeData("light")
-                    loadThemeData()
-                }
-                else -> {
-                    saveThemeData("dark")
-                    loadThemeData()
-                }
-            }
-        }
 
         binding.btnHistory.setOnClickListener {
             Intent(this, HistoryActivity::class.java).also {
@@ -220,28 +201,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveThemeData(mode: String) {
-        editor.apply {
-            putString("theme", mode)
-            apply()
-        }
-    }
-
-    private fun loadThemeData() {
-        when (sharedPref.getString("theme", null)) {
-            "dark" -> {
-                binding.root.setBackgroundColor(ContextCompat.getColor(this, R.color.black))
-                binding.ivThemeChange?.setImageResource(R.drawable.ic_light)
-            }
-            "light" -> {
-                binding.root.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
-                binding.ivThemeChange?.setImageResource(R.drawable.ic_dark2)
-            }
-            else -> {
-                binding.root.setBackgroundColor(ContextCompat.getColor(this, R.color.black))
-                binding.ivThemeChange?.setImageResource(R.drawable.ic_light)
-                saveThemeData("dark")
-            }
-        }
-    }
 }
