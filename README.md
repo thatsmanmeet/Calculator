@@ -1,4 +1,4 @@
-# Calculator
+# 🟰 Calculator
 
 A simple calculator android app with a sleek design built using kotlin language.
 
@@ -12,7 +12,7 @@ A simple calculator android app with a sleek design built using kotlin language.
 
 <img src="screenshot/screen.png" width="200px" height="400px" alt="" />
 
-## Download
+## ⬇️ Download
 
 Go to releases page and download the latest `app-release.apk` from the latest release tag.
 
