@@ -32,4 +32,5 @@
     <string name="btn_parenthesis_right">)</string>
     <string name="btn_sin">sin</string>
     <string name="btn_ln">ln</string>
+    <string name="no_history_text">No History</string>
 </resources>

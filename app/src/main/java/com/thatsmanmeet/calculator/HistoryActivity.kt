@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.thatsmanmeet.calculator.R
 import com.thatsmanmeet.calculator.databinding.ActivityHistoryBinding
 import com.thatsmanmeet.calculator.room.History
 import com.thatsmanmeet.calculator.room.HistoryDatabase
@@ -28,14 +27,12 @@ class HistoryActivity : AppCompatActivity() {
         appDb = HistoryDatabase.getDatabase(this)
         // Initialize shared preferences and get the theme data from it
         sharedPref = getSharedPreferences("themePref", MODE_PRIVATE)
-        loadThemeData()
         getResults()
         // RecyclerView Settings starts here...
         val recyclerView = binding.rvHistory
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = RecyclerViewAdapter(myList)
         // RecyclerView Settings ends here...
-
         // Delete icon button
         binding.ivDelete.setOnClickListener {
             MaterialAlertDialogBuilder(this)
@@ -64,29 +61,6 @@ class HistoryActivity : AppCompatActivity() {
                 myList.add(history)
             }
         }).start()
-    }
-
-    private fun loadThemeData() {
-        when (sharedPref.getString("theme", null)) {
-            "dark" -> {
-                binding.parent.setBackgroundColor(ContextCompat.getColor(this, R.color.black))
-                binding.tvHistoryText.setTextColor(ContextCompat.getColor(this, R.color.white))
-                window.navigationBarColor = getColor(R.color.black)
-                window.statusBarColor = getColor(R.color.black)
-            }
-            "light" -> {
-                binding.parent.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
-                binding.tvHistoryText.setTextColor(ContextCompat.getColor(this, R.color.black))
-                window.navigationBarColor = getColor(R.color.white)
-                window.statusBarColor = getColor(R.color.white)
-            }
-            else -> {
-                binding.parent.setBackgroundColor(ContextCompat.getColor(this, R.color.black))
-                binding.tvHistoryText.setTextColor(ContextCompat.getColor(this, R.color.white))
-                window.navigationBarColor = getColor(R.color.black)
-                window.statusBarColor = getColor(R.color.black)
-            }
-        }
     }
 }
 

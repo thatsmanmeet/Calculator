@@ -9,8 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- my Colors  D3D2D3-->
-    <color name="theme_box">#D3D2D3</color>
     <color name="grey">#817A7A</color>
+    <color name="theme_box">#D3D2D3</color>
     <color name="unified_background_color">#3647C0</color>
     <color name="row_button">#595659</color>
     <color name="green">#4CAF50</color>
@@ -19,6 +19,7 @@
     <color name="reddish_light_button">#DA6C6C</color>
     <color name="light_green">#8BF18F</color>
     <color name="yellow">#FFC107</color>
+    <color name="light_grey">#f1f1f1</color>
 
 </resources>
 
