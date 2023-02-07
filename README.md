@@ -10,7 +10,7 @@ A simple calculator android app with a sleek design built using kotlin language.
 
 ## 🌠 ScreenShot
 
-<img src="screenshot/screenshot.png" width="200px" height="400px" alt="" />
+<img src="screenshot/screen.png" width="200px" height="400px" alt="" />
 
 ## Download
 
