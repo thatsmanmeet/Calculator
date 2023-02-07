@@ -4,7 +4,14 @@ A simple calculator android app with a sleek design built using kotlin language.
 
 ## 🛠️ Technologies Used
 
+- Kotlin
+- Room Database
+- ViewBinding
+- Google Fonts
 
+## 🌠 Screenshot
+
+<img src="screenshot/screen.png" height="400px" width="200px" />
 
 ## ⬇️ Download
 
