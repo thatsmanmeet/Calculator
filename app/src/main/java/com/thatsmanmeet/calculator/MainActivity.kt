@@ -2,7 +2,6 @@ package com.thatsmanmeet.calculator
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -12,19 +11,14 @@ import com.thatsmanmeet.calculator.room.HistoryDatabase
 import kotlinx.coroutines.launch
 import org.mariuszgromada.math.mxparser.Expression
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var sharedPref: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
     private lateinit var appDb: HistoryDatabase
     private var operator = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        sharedPref = getSharedPreferences("themePref", MODE_PRIVATE)
-        editor = sharedPref.edit()
         window.statusBarColor = getColor(R.color.black)
         window.navigationBarColor = getColor(R.color.black)
         appDb = HistoryDatabase.getDatabase(this)
