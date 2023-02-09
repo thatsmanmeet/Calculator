@@ -1,10 +1,8 @@
 package com.thatsmanmeet.calculator
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -18,15 +16,12 @@ class HistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryBinding
     private lateinit var appDb: HistoryDatabase
     private var myList: MutableList<History> = mutableListOf()
-    private lateinit var sharedPref: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // Make instance of the History Database
         appDb = HistoryDatabase.getDatabase(this)
-        // Initialize shared preferences and get the theme data from it
-        sharedPref = getSharedPreferences("themePref", MODE_PRIVATE)
         getResults()
         // RecyclerView Settings starts here...
         val recyclerView = binding.rvHistory
