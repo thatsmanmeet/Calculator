@@ -1,33 +1,41 @@
 package com.thatsmanmeet.calculator
 
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.thatsmanmeet.calculator.databinding.ActivityHistoryBinding
-import com.thatsmanmeet.calculator.room.History
-import com.thatsmanmeet.calculator.room.HistoryDatabase
-import kotlinx.coroutines.Runnable
+import com.thatsmanmeet.calculator.room.HistoryViewModel
 import kotlinx.coroutines.launch
 
 class HistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryBinding
-    private lateinit var appDb: HistoryDatabase
-    private var myList: MutableList<History> = mutableListOf()
+    private lateinit var viewModel:HistoryViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        // Make instance of the History Database
-        appDb = HistoryDatabase.getDatabase(this)
-        getResults()
         // RecyclerView Settings starts here...
         val recyclerView = binding.rvHistory
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = RecyclerViewAdapter(myList)
         // RecyclerView Settings ends here...
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(this.application)
+        )[HistoryViewModel::class.java]
+
+        viewModel.allHistory.observe(this){list->
+            recyclerView.adapter = RecyclerViewAdapter(list.toMutableList())
+            if (list.isEmpty()){
+                binding.tvNoHistory.visibility = View.VISIBLE
+            }else{
+                binding.tvNoHistory.visibility = View.INVISIBLE
+            }
+        }
+
         // Delete icon button
         binding.ivDelete.setOnClickListener {
             MaterialAlertDialogBuilder(this)
@@ -35,27 +43,16 @@ class HistoryActivity : AppCompatActivity() {
                 .setMessage("This action will delete all the calculator history.")
                 .setPositiveButton("Delete"){_,_->
                     deleteData()
-                    finish()
+//                    finish()
                 }
                 .setNegativeButton("Cancel",null)
                 .show()
         }
     }
-
     private fun deleteData() {
         lifecycleScope.launch {
-            appDb.historyDao().deleteAll()
+            viewModel.deleteAllHistory()
         }
-        Toast.makeText(this, "History Deleted", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun getResults() {
-        Thread(Runnable {
-            val list = appDb.historyDao().getAll()
-            for (history in list) {
-                myList.add(history)
-            }
-        }).start()
     }
 }
 

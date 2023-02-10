@@ -4,25 +4,28 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.thatsmanmeet.calculator.databinding.ActivityMainBinding
 import com.thatsmanmeet.calculator.room.History
-import com.thatsmanmeet.calculator.room.HistoryDatabase
+import com.thatsmanmeet.calculator.room.HistoryViewModel
 import kotlinx.coroutines.launch
 import org.mariuszgromada.math.mxparser.Expression
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var appDb: HistoryDatabase
     private var operator = false
+    private lateinit var viewModel: HistoryViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.statusBarColor = getColor(R.color.black)
         window.navigationBarColor = getColor(R.color.black)
-        appDb = HistoryDatabase.getDatabase(this)
-
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(this.application)
+        )[HistoryViewModel::class.java]
         binding.btnHistory.setOnClickListener {
             Intent(this, HistoryActivity::class.java).also {
                 startActivity(it)
@@ -145,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         if (data.isNotEmpty()) {
             val history = History(null, data)
             lifecycleScope.launch {
-                appDb.historyDao().insert(history)
+            viewModel.insertHistory(history)
             }
         }
     }
